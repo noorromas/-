@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شات نجد للجوال | مبدّل الألوان الاحترافي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f3f5f7;
+      --el-main: #ffffff;
+      --clr-primary: #6c5ce7;
+      --clr-secondary: #00b894;
+      --radius-xl: 24px;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Cairo", sans-serif;
+    }
+    body {
+      background: var(--bg-main);
+      transition: background 0.4s ease;
+      color: #333;
+      direction: rtl;
+    }
+    .top-banner {
+      background: linear-gradient(120deg, var(--clr-primary), var(--clr-secondary));
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+    .top-banner h1 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .top-banner .brand-info {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .top-banner .brand-info a {
+      color: #ffeaa7;
+      text-decoration: none;
+    }
+    #color-icon {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 64px;
+      height: 64px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+      z-index: 1000;
+    }
+    #color-icon:hover {
+      transform: scale(1.08);
+    }
+    #color-icon img {
+      width: 42px;
+      height: 42px;
+    }
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      display: none;
+      z-index: 999;
+    }
+    .panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      text-align: center;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      from { scale: 0.8; opacity: 0; }
+      to { scale: 1; opacity: 1; }
+    }
+    .panel h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--clr-primary);
+      margin-bottom: 12px;
+    }
+    .panel p {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #444;
+    }
+    .panel button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(120deg, var(--clr-primary), var(--clr-secondary));
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: opacity 0.3s;
+    }
+    .panel button:hover {
+      opacity: 0.9;
+    }
+    .custom-color {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .custom-color div {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border 0.2s, transform 0.2s;
+    }
+    .custom-color div:hover {
+      transform: scale(1.07);
+    }
+    .custom-color .selected {
+      border-color: var(--clr-primary);
+    }
+    .preview-bar {
+      width: 100%;
+      height: 42px;
+      border-radius: 10px;
+      border: 2px solid #888;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+    }
+    #apply-colors, #reset-colors {
+      width: 100%;
+      padding: 14px 0;
+      border: none;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    #apply-colors {
+      background: linear-gradient(120deg, var(--clr-primary), var(--clr-secondary));
+      color: #fff;
+    }
+    #reset-colors {
+      background: #ececec;
+      color: #333;
+    }
+    #designer-rights {
+      font-size: 12px;
+      color: #555;
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+    .chat-container {
+      background: var(--el-main);
+      width: 90%;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 24px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+    .message {
+      background: var(--el-main);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .chat-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-banner">
+    <h1>شات نجد للجوال</h1>
+    <div class="brand-info">
+      تصميم شات نجد | مبرمج: رمادي ديزاين | واتساب: <a href="tel:+967778436340">+967778436340</a>
+    </div>
+  </div>
+  <div class="chat-container">
+    <div class="message">مرحباً بك في شات نجد</div>
+    <input class="chat-input" placeholder="اكتب رسالتك هنا...">
+  </div>
+  <div id="color-icon">
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Colors">
+  </div>
+  <div id="overlay">
+    <div class="panel" id="intro-panel">
+      <h3>شات نجد للجوال</h3>
+      <p>حقوق: شات نجد</p>
+      <p>مبرمج: <strong>رمادي ديزاين</strong></p>
+      <p>واتساب الدعم: <strong>+967778436340</strong></p>
+      <button id="open-colors">فتح نظام الألوان</button>
+    </div>
+    <div class="panel" id="color-picker-panel" style="display:none;">
+      <h4>اختر لون الخلفية</h4>
+      <div class="custom-color" id="bg-colors"></div>
+      <h4>اختر لون العناصر</h4>
+      <div class="custom-color" id="el-colors"></div>
+      <div class="preview-bar" id="preview-bg"></div>
+      <div class="preview-bar" id="preview-el"></div>
+      <button id="apply-colors">تطبيق الألوان</button>
+      <button id="reset-colors">إلغاء الألوان</button>
+      <div id="designer-rights">
+        حقوق التصميم: شات نجد | برمجة: رمادي ديزاين
+      </div>
+    </div>
+  </div>
+  <script>
+    const icon = document.getElementById('color-icon');
+    const overlay = document.getElementById('overlay');
+    const intro = document.getElementById('intro-panel');
+    const picker = document.getElementById('color-picker-panel');
+    const openBtn = document.getElementById('open-colors');
+    const bgWrap = document.getElementById('bg-colors');
+    const elWrap = document.getElementById('el-colors');
+    const prevBg = document.getElementById('preview-bg');
+    const prevEl = document.getElementById('preview-el');
+    const applyBtn = document.getElementById('apply-colors');
+    const resetBtn = document.getElementById('reset-colors');
+    const bgList = ['#fce4ec','#f3e5f5','#e8eaf6','#e0f7fa','#e8f5e9','#fff3e0'];
+    const elList = ['#d50000','#aa00ff','#6200ea','#2962ff','#00c853','#ff6d00'];
+    const targets = ['.chat-container','.message','.chat-input'];
+
+    bgList.forEach(c => {
+      const box = document.createElement('div');
+      box.style.background = c;
+      box.onclick = () => {
+        document.querySelectorAll('#bg-colors div').forEach(b => b.classList.remove('selected'));
+        box.classList.add('selected');
+        prevBg.style.background = c;
+      };
+      bgWrap.appendChild(box);
+    });
+
+    elList.forEach(c => {
+      const box = document.createElement('div');
+      box.style.background = c;
+      box.onclick = () => {
+        document.querySelectorAll('#el-colors div').forEach(b => b.classList.remove('selected'));
+        box.classList.add('selected');
+        prevEl.style.background = c;
+      };
+      elWrap.appendChild(box);
+    });
+
+    icon.onclick = () => { overlay.style.display = 'block'; intro.style.display = 'block'; picker.style.display = 'none'; };
+    openBtn.onclick = () => { intro.style.display = 'none'; picker.style.display = 'block'; };
+    overlay.onclick = e => { if (e.target === overlay) overlay.style.display = 'none'; };
+
+    applyBtn.onclick = () => {
+      if (prevBg.style.background) document.documentElement.style.setProperty('--bg-main', prevBg.style.background);
+      if (prevEl.style.background) {
+        document.documentElement.style.setProperty('--el-main', prevEl.style.background);
+        targets.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => el.style.background = prevEl.style.background);
+        });
+      }
+      overlay.style.display = 'none';
+    };
+
+    resetBtn.onclick = () => {
+      document.documentElement.style.setProperty('--bg-main', '#f3f5f7');
+      document.documentElement.style.setProperty('--el-main', '#ffffff');
+      prevBg.style.background = '';
+      prevEl.style.background = '';
+      targets.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => el.style.background = 'var(--el-main)');
+      });
+    };
+  </script>
+</body>
+</html>
